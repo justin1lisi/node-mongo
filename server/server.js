@@ -8,6 +8,8 @@ var {User} = require('./models/user');
 
 var app = express();
 
+const port = process.env.PORT || 3003;
+
 app.use(bodyParser.json());
 
 app.post('/todos', (req, res) => {
@@ -43,15 +45,15 @@ app.get('/todos/:id', (req, res) => {
     if(!todo){
       return res.status(404).send({error: 'Todo not found'});
     }
-    
+
     res.send({todo});
   }).catch((e) => {
     res.status(400).send();
   });
 });
 
-app.listen(3003, () => {
-  console.log('Started on port 3003');
+app.listen(port, () => {
+  console.log(`Started on port ${port}`);
 });
 
 module.exports = {
